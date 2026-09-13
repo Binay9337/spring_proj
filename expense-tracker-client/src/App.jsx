@@ -5,14 +5,17 @@ import Footer from "./Component/Footer";
 import Header from "./Component/Header";
 import Summary from "./Component/Summary";
 import axios from "axios";
+import expenseService from "./Service/expenseService";
 
 export default function App() {
   const [expense, setExpense] = useState([]);
+  const [editingExpense, setEditingExpense] = useState(null);
+
   const getExpenses = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/expenses");
-      console.log("response is:", response);
-      console.log("data is", response.data);
+      const response = await expenseService.getExpenses();
+      // console.log("response is:", response);
+      // console.log("data is", response.data);
       setExpense(response.data);
     } catch (error) {
       console.log("error is : ", error);
@@ -27,10 +30,18 @@ export default function App() {
         <Header />
 
         <main className="max-w-4xl mx-auto py-4 mt-4">
-          <ExpenseForm getExpenses={getExpenses} />
+          <ExpenseForm
+            getExpenses={getExpenses}
+            editingExpense={editingExpense}
+            setEditingExpense={setEditingExpense}
+          />
 
           <Summary expense={expense} />
-          <ExpenseList expense={expense} />
+          <ExpenseList
+            expense={expense}
+            getExpenses={getExpenses}
+            setEditingExpense={setEditingExpense}
+          />
         </main>
 
         <Footer />

@@ -1,7 +1,7 @@
 import axios from "axios";
 // import React, { useEffect, useState } from "react";
 
-const ExpenseList = ({ expense }) => {
+const ExpenseList = ({ expense, setEditingExpense, getExpenses }) => {
   // const [expense, setExpense] = useState([]);
   // const getExpenses = async () => {
   //   try {
@@ -14,6 +14,12 @@ const ExpenseList = ({ expense }) => {
   //   }
   // };
   // useEffect(() => getExpenses(), []);
+
+  const handleEdit = (expense) => {
+    // if (confirm("are u sure to edit")) {
+    setEditingExpense(expense);
+    // }
+  };
 
   const handleDelete = async (expenseId) => {
     if (confirm("are u sure to delete")) {
@@ -81,7 +87,10 @@ const ExpenseList = ({ expense }) => {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex gap-2 justify-center">
-                        <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold rounded-lg px-3 py-1.5 transition-colors duration-200 text-xs">
+                        <button
+                          onClick={() => handleEdit(exp)}
+                          className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold rounded-lg px-3 py-1.5 transition-colors duration-200 text-xs"
+                        >
                           Edit
                         </button>
 
