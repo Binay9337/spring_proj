@@ -61,7 +61,7 @@ const ExpenseList = ({ expense }) => {
                     key={idx}
                     className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
                   >
-                    <td className="px-4 py-3 text-gray-400">{idx+1}</td>
+                    <td className="px-4 py-3 text-gray-400">{idx + 1}</td>
                     <td className="px-4 py-3 text-gray-700 font-medium">
                       {exp.title}
                     </td>

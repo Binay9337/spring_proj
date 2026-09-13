@@ -2,6 +2,7 @@ import React from "react";
 
 function Summary({ expense }) {
   const totalExpense = expense.reduce((acc, exp) => exp.price + acc, 0);
+  console.log("--------------", expense);
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 mb-4">
       <h2 className="text-xl font-semibold text-gray-700 mb-4">Summary</h2>
@@ -13,7 +14,9 @@ function Summary({ expense }) {
           <div>
             {" "}
             <p className=" font-medium text-gray-500">Total Expenses</p>
-            <p className="text-3xl  text-blue-600 font-bold">{totalExpense}</p>
+            <p className="text-3xl  text-blue-600 font-bold">
+              {totalExpense.toFixed(2)}
+            </p>
           </div>
         </div>
         {/* Total entries */}
