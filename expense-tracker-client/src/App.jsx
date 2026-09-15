@@ -28,7 +28,6 @@ export default function App() {
     <>
       <div className="min-h-screen bg-gray-100">
         <Header />
-
         <main className="max-w-4xl mx-auto py-4 mt-4">
           <ExpenseForm
             getExpenses={getExpenses}

@@ -16,9 +16,7 @@ const ExpenseList = ({ expense, setEditingExpense, getExpenses }) => {
   // useEffect(() => getExpenses(), []);
 
   const handleEdit = (expense) => {
-    // if (confirm("are u sure to edit")) {
     setEditingExpense(expense);
-    // }
   };
 
   const handleDelete = async (expenseId) => {
