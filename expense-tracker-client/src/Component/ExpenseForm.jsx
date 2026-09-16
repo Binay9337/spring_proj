@@ -6,6 +6,8 @@ function ExpenseForm({ getExpenses, editingExpense, seteditingExpense }) {
   const [category, setcategory] = useState("");
   const [price, setprice] = useState("");
   const [date, setdate] = useState("");
+  const [errors, setError] = useState({});
+  const newErrors = {};
 
   const handleCancel = () => {
     seteditingExpense(null);
@@ -116,8 +118,6 @@ function ExpenseForm({ getExpenses, editingExpense, seteditingExpense }) {
     setprice("");
     setdate("");
   };
-  const [errors, setError] = useState({});
-  const newErrors = {};
 
   const validate = () => {
     if (!title) {
