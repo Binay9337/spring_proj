@@ -1,0 +1,69 @@
+
+package com.example.jpa_annotation_concept;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "emp")
+@Builder
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "emp_id")
+    private String id;
+
+    @Column(name = "emp_name", columnDefinition = "VARCHAR(30)", nullable = false, unique = true)
+    /*
+     * -- columndefinition -->> chnage datatype or u want to modify datatype then we
+     * can use that
+     * -- nullable --> here it is always false we can change it by this by using
+     * this attribute
+     * 
+     * ---- unique -->this make unique elements are allowed
+     * annotation
+     */
+    private String name;
+
+    @Lob // String -> tinytext , byte[] --> BLOB, char[] --> CLOB
+    @Column(name = "emp_desc")
+    @Transient
+    private String description;
+    // precision--> how many digit in left side
+    // scale-->> digits in right side
+    @Column(name = "emp_salary", precision = 10, scale = 2)
+    private BigDecimal salary;
+
+    @Column(name = "emp_status")
+    @Enumerated(EnumType.STRING)
+    private EmployeeStatus status;
+
+    @CreationTimestamp
+    private LocalDateTime createdTime;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedTime;
+
+}

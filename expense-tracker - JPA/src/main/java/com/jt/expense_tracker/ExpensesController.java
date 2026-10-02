@@ -80,6 +80,7 @@ package com.jt.expense_tracker;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -95,38 +96,45 @@ import lombok.RequiredArgsConstructor;
 /**
  * ExpensesController
  */
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
+@CrossOrigin("http://localhost:5173/")
+@RequestMapping("expenses")
 public class ExpensesController {
 
     private final ExpenseService expenseService;
 
-    @GetMapping("/expenses")
+    // @GetMapping("/expenses")
+    @GetMapping
     public List<Expense> getExpenses() {
         return expenseService.getExpenses();
     }
 
-    @GetMapping("/expenses/{id}")
+    // @GetMapping("/expenses/{id}")
+    @GetMapping("/{id}")
     public Expense getExpenseById(@PathVariable int id) {
         return expenseService.getExpenseById(id);
 
     }
 
-    @PostMapping("/expenses")
+    // @PostMapping("/expenses")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Expense createExpense(@RequestBody Expense expense) {
         return expenseService.createExpense(expense);
 
     }
 
-    @DeleteMapping("/expenses/{id}")
+    // @DeleteMapping("/expenses/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT) // if u have no return then -- 204
     public String deleteExpense(@PathVariable int id) {
         return expenseService.deleteExpense(id);
 
     }
 
-    @PutMapping("/expenses")
+    // @PutMapping("/expenses")
+    @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED) // when update ---- 202
     public Expense updatExpense(@RequestBody Expense expense) {
 
