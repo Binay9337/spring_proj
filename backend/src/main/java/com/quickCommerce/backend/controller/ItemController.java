@@ -29,29 +29,30 @@ public class ItemController {
             @RequestParam(defaultValue = "itemName") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir
     ) {
+        System.out.println("Controller Called");
         return itemService.getItems(search, categoryId, minPrice, maxPrice, active, pageSize, pageNumber, sortBy, sortDir);
     }
+
     @GetMapping("/{itemId}")
-    @ResponseStatus(HttpStatus.CREATED)
-     public ItemResponse getItemById(@PathVariable String itemId){
+    public ItemResponse getItem(@PathVariable String itemId) {
         return itemService.getItemById(itemId);
-     }
+    }
+
     @DeleteMapping("/{itemId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable String itemId){
-         itemService.deleteItem(itemId);
-
+    public void deleteItem(@PathVariable String itemId) {
+            itemService.deleteItem(itemId);
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public  ItemResponse createItem(@RequestBody @Valid ItemRequest itemRequest){
-        return  itemService.createitem(itemRequest);
-    }
-    @PutMapping("/{itemId}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public  ItemResponse updateItem(@PathVariable String itemId,
-                                    @RequestBody @Valid ItemRequest itemRequest){
-        return  itemService.updateItem(itemId,itemRequest);
+    public ItemResponse createItem(@RequestBody @Valid ItemRequest itemRequest) {
+        return itemService.createitem(itemRequest);
     }
 
+    @PutMapping("/{itemId}")
+    public ItemResponse updateItem(@PathVariable String itemId,
+                                   @RequestBody @Valid ItemRequest itemRequest) {
+        return itemService.updateItem(itemId, itemRequest);
+    }
 }

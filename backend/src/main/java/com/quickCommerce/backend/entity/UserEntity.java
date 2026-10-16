@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,7 +22,7 @@ public class User {
     @Column(nullable = false,unique = true, length = 100)
     private String userEmail;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 100)
     private String userPassword;
 
     @Enumerated(EnumType.STRING)

@@ -1,8 +1,8 @@
-package com.qcommerce.backend.mapper;
+package com.quickCommerce.backend.mapper;
 
 import com.quickCommerce.backend.dto.request.RegisterRequest;
 import com.quickCommerce.backend.dto.response.UserResponse;
-import com.quickCommerce.backend.entity.User;
+import com.quickCommerce.backend.entity.UserEntity;
 import com.quickCommerce.backend.entity.helper.AddressInfo;
 import com.quickCommerce.backend.entity.helper.ContactInfo;
 import com.quickCommerce.backend.entity.helper.Role;
@@ -11,19 +11,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class UserMapper {
     private UserMapper(){}
 
-    public static User toEntity(RegisterRequest request, PasswordEncoder passwordEncoder) {
-        return User.builder()
+    public static UserEntity toEntity(RegisterRequest request, PasswordEncoder passwordEncoder) {
+        return UserEntity.builder()
                 .userEmail(request.userEmail())
                 .userPassword(passwordEncoder.encode(request.userPassword()))
                 .userRole(Role.USER)
                 .profileImage(null)
                 .enabled(true)
                 .contactInfo(new ContactInfo(request.fullName(), request.phoneNumber()))
-                .addressInfo(new AddressInfo(null, null, null, null))
+                .addressInfo(new AddressInfo("", "", "", ""))
                 .build();
     }
 
-    public static UserResponse toResponse(User user) {
+    public static UserResponse toResponse(UserEntity user) {
         return new UserResponse(
                 user.getUserId(),
                 user.getUserEmail(),
