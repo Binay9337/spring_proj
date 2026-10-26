@@ -4,13 +4,9 @@ import com.quickCommerce.backend.constant.AppConstant;
 import com.quickCommerce.backend.dto.request.CategoryRequest;
 import com.quickCommerce.backend.dto.response.CategoryResponse;
 import com.quickCommerce.backend.dto.response.PageResponse;
-import com.quickCommerce.backend.entity.Category;
 import com.quickCommerce.backend.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,18 +28,18 @@ public class CategoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoryResponse createCategory(@RequestBody @Valid CategoryRequest categoryRequest){
+    public CategoryResponse createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
         return categoryService.createCategory(categoryRequest);
     }
 
     @GetMapping("/{categoryId}")
-    public CategoryResponse getCategory(@PathVariable String categoryId){
+    public CategoryResponse getCategory(@PathVariable String categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
 
     @DeleteMapping("/{categoryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCategory(@PathVariable String categoryId){
+    public void deleteCategory(@PathVariable String categoryId) {
         categoryService.deleteCategoryById(categoryId);
     }
 
@@ -57,7 +53,7 @@ public class CategoryController {
     @PostMapping("/{categoryId}/image")
     public CategoryResponse uploadImage(
             @PathVariable String categoryId,
-            @RequestParam MultipartFile image){
+            @RequestParam MultipartFile image) {
         return categoryService.uploadCategoryImage(categoryId, image);
     }
 }

@@ -23,10 +23,10 @@ public class JwtService {
     private long expirationMs;
 
     public String generateToken(String userId, String userRole){
-        return Jwts.builder()
+        return Jwts.builder()   // it starts creating and now need to write what would be in the token
                 .subject(userId)
                 .claim("role", userRole)
-                .signWith(getSecretKey())
+                .signWith(getSecretKey()) // it takes cryptographic secret key not string so it took getSecretKey() which return cryptographic secret key
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expirationMs))
                 .compact();
@@ -43,13 +43,14 @@ public class JwtService {
     }
 
     private Claims extratClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(getSecretKey())
+        return Jwts.parser()// for extract parser is required and for create  builder is required
+                .verifyWith(getSecretKey())// this verify with the secret key what was signed in
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
     }
 
+    // this make our string secret key to cryptographic SecretKey.....what JJwt library understand
     private SecretKey getSecretKey(){
         return Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }

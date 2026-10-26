@@ -28,13 +28,28 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+
+        /*
+         * When the client sends a request to the server, it includes
+         * an Authorization header containing a Bearer token.
+         *
+         * Example request:
+         * GET /orders
+         * Authorization: Bearer abc123xyz
+         *
+         * The server reads the Authorization header to get the token.
+         */
+
+
+
         // Authorization header
         String authHeader = request.getHeader("Authorization");
 
         // validate Authorization Header
+//        auth header can be null like when user not logined so token has not created so won't pass
         if(authHeader == null || !authHeader.startsWith("Bearer ")){
             // if validation failed :- skip the JWT filter
-            // either request will hit a endpoint (permitAll) or rejected by Security Filter Chain due to authorization constraints
+            // either request will hit an endpoint (permitAll) or rejected by Security Filter Chain due to authorization constraints
             filterChain.doFilter(request, response);
             return;
         }

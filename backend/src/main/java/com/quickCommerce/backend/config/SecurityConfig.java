@@ -100,10 +100,10 @@ public class SecurityConfig {
                         // Images — GET is public (UI displays images without auth)
                         //          category & item uploads are ADMIN only
                         //          profile image upload/delete requires authentication
-                        .requestMatchers(HttpMethod.GET,    "/api/images/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,   "/api/images/categories/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,   "/api/images/items/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,   "/api/images/users/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/images/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/images/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/images/items/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/images/users/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/images/users/**").authenticated()
 
                         .anyRequest().authenticated()

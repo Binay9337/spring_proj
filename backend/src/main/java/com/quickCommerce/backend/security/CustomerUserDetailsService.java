@@ -3,7 +3,9 @@ package com.quickCommerce.backend.security;
 import com.quickCommerce.backend.entity.UserEntity;
 import com.quickCommerce.backend.exception.ResourceNotFound;
 import com.quickCommerce.backend.repository.UserRepository;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomerUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
