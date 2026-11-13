@@ -1,3 +1,24 @@
 spring:
   application:
     name: backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/backend_db?createDatabaseIfNotExists=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 1200
+
+jwt:
+  secret: 0d84f67ce62a61d9eda8d58af1267ee8dbe0de40725f351de6870890e9804959
+  expirationMs: 86400000
